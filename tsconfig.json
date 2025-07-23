@@ -1,8 +1,12 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "**/*"],
+  "include": [".astro/types.d.ts", "**/*", "src/pages/blog/.abusing-rust-typesystem.mdx", "src/pages/blog/.first-blog.mdx", "src/pages/blog/.first-blog.mdx"],
   "exclude": ["dist"],
   "compilerOptions": {
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "types": [
+        "./worker-configuration.d.ts",
+        "node"
+    ]
   }
 }

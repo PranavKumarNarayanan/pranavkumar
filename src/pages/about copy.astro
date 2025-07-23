@@ -8,7 +8,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 	<main>
 		<script>
 			const div = document.querySelector(".typewriter_effect");
-        //const text = "Hello!, Minions";
+        
 
         function textTypingEffect(element, text, i = 0) {
           if (i === 0) element.textContent = ""; 
@@ -35,19 +35,32 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 					textTypingEffect(div, text);
 		</script>
 
+		<script>
+			const zones = document.querySelectorAll('.zone');
+
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('visible');
+				}
+				});
+			}, {
+				threshold: 0.3
+			});
+
+			zones.forEach(zone => observer.observe(zone));
+		</script>
 
 
 
 
 
-		<h1><div class="typewriter_effect" data-typing-text="Hello! Minions.."></div>
+		<h1><strong><div class="typewriter_effect" data-typing-text="Hello! Adorable yellow stalkers! 👀.."></div></strong>
 		
 		</Inquery></h1>
 		<p>
-		I'm Pranav, and I love minions
-		</p><br><br><br>
-		<p>Get to know more about me <a href="/about" onclick="location.href=this.href; return false;">here</a>
-</p>
+			<strong></strong><br>
+		</p>
 		<ul class="icons">
 			<li>
 				<Inquery href="https://github.com/PranavKumarNarayanan/" question="follow me on github">
@@ -55,7 +68,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 				</Inquery>
 			</li>
 			<li>
-				<Inquery href="/blogs" question="Read my blogs (it's such a great time killer)">
+				<Inquery href="/blogs" question="Read my blogs (pls don't)">
 					<img src="/assets/icons/blog.svg" alt="Blog Icon" />
 				</Inquery>
 			</li>
@@ -71,7 +84,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		flex-direction: column;
 
 		height: 90vh;
-		padding: 0px;
+		padding: 20px;
 		text-align: center;
 	}
 
@@ -111,7 +124,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 	h1 {
 		transform: translateY(0.5rem);
-		font-size: min(7rem, 12vw);
+		font-size: min(4rem, 12vw);
 		text-shadow: 1px 1px 15px color-mix(in srgb, white, transparent 50%);
 	}
 

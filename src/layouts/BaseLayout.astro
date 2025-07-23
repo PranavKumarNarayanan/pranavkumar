@@ -1,0 +1,33 @@
+---
+import "../styles/main.css";
+import NavBar from "../components/NavBar.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import { ClientRouter } from "astro:transitions";
+
+interface Props {
+	title: string;
+	navBar?: boolean;
+}
+
+const { title, navBar = true } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<ClientRouter />
+
+		<title>{title} - Pranav Kumar</title>
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+	</head>
+	<body>
+		<header>
+			<ThemeToggle />
+			{navBar && <NavBar />}
+		</header>
+		<slot />
+	</body>
+</html>

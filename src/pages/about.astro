@@ -1,63 +1,247 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
+import Inquery from "../components/Inquery.astro";
+import Inquery_special from "../components/Inquery_special.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage={AboutHeroImage}
->
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
+<BaseLayout title="Home" navBar={false}>
+	<main>
+		<title>About</title>
+		<script>
+			const div = document.querySelector(".typewriter_effect");
+        
 
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
+        function textTypingEffect(element, text, i = 0) {
+          if (i === 0) element.textContent = ""; 
 
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
+          element.textContent = text.substring(0, i + 1) + "|";
 
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
+          if (i === text.length - 1) {
+            element.textContent = text + "";
+            const cursor = document.createElement("span");
+            cursor.classList.add("blinking-cursor");
+            cursor.textContent = ".";
+            element.appendChild(cursor);
+            return;
+          }
 
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
-</Layout>
+			setTimeout(() => textTypingEffect(element, text, i + 1), 50);
+			}
+			const typingTargets = document.querySelectorAll("[data-typing-text]");
+				typingTargets.forEach((el) => {
+				const text = el.getAttribute("data-typing-text");
+				textTypingEffect(el, text);
+				});
+
+					textTypingEffect(div, text);
+					document.addEventListener("DOMContentLoaded", textTypingEffect);
+					window.addEventListener("astro:after-swap", textTypingEffect); // For Astro View Transitions
+
+		</script>
+
+		<script>
+			const zones = document.querySelectorAll('.zone');
+
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('visible');
+				}
+				});
+			}, {
+				threshold: 0.3
+			});
+
+			zones.forEach(zone => observer.observe(zone));
+		</script>
+
+
+
+
+
+		
+  <section class="trail-head" id="trail-head">
+    <div class="intro">
+      <h1><strong><div class="typewriter_effect" data-typing-text="Hello! Adorable yellow stalkers! 👀.."></div></strong></h1>
+      <p class="intro">I'm Pranav. A second-year college student with deep passion in Machine learning, Deep learning, Web developtment, and Music. Ohh yeah, I also love minions ☺️</p><br><br>
+	  <p>Ready to explore the Minionverse of Me? Scroll down to unlock secrets...</p>
+    </div>
+  </section>
+
+  <section class="zone" data-zone="education">
+    <h2>🏫 I too am a literate hehe</h2>
+    <p>I’ve learned stuff—like how to not trip on banana peels and how to use Python 🐍 without actually charming snakes.</p>
+    <ul>
+      <li>🧠 B.Tech in Computer Science – Amrita Vishwa Vidyapeetham</li>
+      <li>🎓 High School – Pon Vidyashram CBSE (Topped Banana Physics)</li>
+    </ul>
+  </section>
+
+  <section class="zone" data-zone="skills">
+    <h2>🛠️ Secret evil skills</h2>
+    <p>From coding to causing controlled chaos, here’s what I can do:</p>
+    <ul>
+      <li>💻 Python, JS, Content Writing, Music</li>
+      <li>🧠 Machine Learning, Deep learning, Image processing</li>
+      <li>🎨 Design with Figma, CSS, Astro</li>
+	  <li>🗣️ Professional instigator (Debator)</li>
+    </ul>
+  </section>
+
+  <section class="zone" data-zone="projects">
+    <h2>📦 Evil Projects Vault (Sshh. Keep it under your breath 🤐🫢)</h2>
+    <p>These are top secret, and they are top cool too!</p>
+    <ul>
+      <li>🛰️ ML model to detect <strong>Hate speeches</strong></li>
+      <li>🚀 ML model to fix errors in <strong>Linux file system.</strong></li>
+    </ul>
+  </section>
+</main>
+
+</BaseLayout>
+
+<style>
+	.intro {
+		padding-left: 5%;
+		padding-right: 5%;
+	}
+	main {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+
+			
+		padding: 20px;
+		text-align: center;
+	}
+
+	p {
+		position: relative;
+	}
+
+	.correction-a {
+		color: inherit;
+		text-decoration: none;
+
+		top: 0.7em;
+		position: relative;
+	}
+
+	.correction-a::before {
+		content: "a";
+
+		top: -1.8em;
+		position: absolute;
+	}
+
+	.correction-a::after {
+		opacity: 0;
+		font-size: 0.5em;
+		text-decoration: underline;
+		content: "english is hard";
+
+		left: 0;
+		bottom: -2em;
+		position: absolute;
+	}
+
+	.correction-a:hover::after {
+		opacity: 1;
+	}
+
+	h1 {
+		transform: translateY(0.5rem);
+		font-size: min(4rem, 12vw);
+		text-shadow: 1px 1px 15px color-mix(in srgb, white, transparent 50%);
+	}
+
+	p {
+		font-size: max(1rem, min(2rem, 3.5vw));
+	}
+
+	.icons {
+		gap: 1rem;
+		display: flex;
+		list-style: none;
+
+		margin: 30px 0;
+	}
+
+	.icons img {
+		cursor: pointer;
+
+		opacity: 0.7;
+		width: 1.5rem;
+		height: 1.5rem;
+		transition: opacity 0.3s;
+	}
+
+	.icons img:hover {
+		opacity: 1;
+	}
+
+	.icons img[alt="YouTube Icon"] {
+		scale: 1.2;
+	}
+
+	.icons img[alt="GitHub Icon"] {
+		filter: invert(1);
+	}
+
+	:root:has(#theme-light:checked) .icons img[alt="GitHub Icon"] {
+		filter: invert(0);
+	}
+
+	.icons img[alt="Blog Icon"] {
+		filter: invert(1);
+		transform: translateY(-0.1rem);
+	}
+
+	:root:has(#theme-light:checked) .icons img[alt="Blog Icon"] {
+		filter: invert(0);
+	}
+
+	.zone {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all 0.8s ease-out;
+  padding: 4rem 2rem;
+  margin: 3rem 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1.5rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  max-width: 700px;
+  backdrop-filter: blur(10px);
+}
+
+.zone.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.zone h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #ffd000;
+}
+
+.zone ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.zone ul li {
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+.trail-head {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+</style>

@@ -1,0 +1,90 @@
+---
+
+---
+
+<label transition:persist>
+    <input type="checkbox" id="theme-light" />
+    <script>
+        const themeToggle = document.getElementById(
+            "theme-light",
+        ) as HTMLInputElement;
+
+        themeToggle.checked = localStorage.getItem("theme") === "light";
+
+        themeToggle.addEventListener("change", () => {
+            if (themeToggle.checked) {
+                localStorage.setItem("theme", "light");
+            } else {
+                localStorage.removeItem("theme");
+            }
+        });
+    </script>
+    <span></span>
+</label>
+
+<style is:global>
+    * {
+        transition:
+            background-color 0.3s,
+            color 0.3s;
+    }
+
+    :root {
+        --text: rgb(200, 200, 200);
+        --background: black;
+        --primary: orange;
+        --secondary: rgb(255, 69, 0);
+        --accent: rgb(255, 69, 0);
+    }
+
+    :root:has(#theme-light:checked) {
+        --text: black;
+        --background: white;
+        --primary: orange;
+        --secondary: rgb(255, 69, 0);
+        --accent: rgb(255, 69, 0);
+    }
+</style>
+
+<style>
+    label {
+        top: 30px;
+        right: 20px;
+        position: absolute;
+
+        z-index: 1000;
+    }
+
+    label > input {
+        width: 0;
+        opacity: 0;
+        cursor: pointer;
+        position: absolute;
+    }
+
+    label {
+        display: block;
+        cursor: pointer;
+
+        padding: 9px;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 20%;
+        background-color: var(--text);
+    }
+
+    span {
+        width: 100%;
+        height: 100%;
+        display: block;
+
+        background-size: cover;
+        background-position: center;
+        background-image: url("/assets/icons/sun.svg");
+    }
+
+    label:has(#theme-light:checked) > span {
+        background-image: url("/assets/icons/moon.svg");
+        filter: hue-rotate(190deg) invert(1);
+    }
+</style>
